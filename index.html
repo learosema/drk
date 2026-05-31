@@ -1,0 +1,56 @@
+---
+---
+<!DOCTYPE html>
+<html lang="de" data-theme="light" data-lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotkreuz- und Rothalbmondbewegung – Interaktive Präsentation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}" />
+</head>
+<body>
+
+{% include intro.html %}
+
+<!-- Panels (hidden data store, read by app.js) -->
+{% for panel in site.panels %}
+<article hidden lang="{{ panel.lang }}" id="{{ panel.panel_id }}-{{ panel.lang }}">
+  <h2>{{ panel.title }}</h2>
+  <div class="badge">{{ panel.badge }}</div>
+  <p class="subtitle">{{ panel.subtitle }}</p>
+  <div class="body">{{ panel.content }}</div>
+</article>
+{% endfor %}
+
+<div id="app">
+  {% include header.html %}
+
+  <div id="map-container">
+    <div id="map" role="application" aria-label="Interaktive Karte"></div>
+
+    <div class="hint-pill" id="hint-pill">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span data-i18n="hint">Marker anklicken für Details · Ebene unten wählen</span>
+    </div>
+
+    {% include movement-bar.html %}
+    {% include level-pills.html %}
+
+    <div class="overlay-backdrop" id="overlay-backdrop" onclick="closePanel()"></div>
+
+    {% include info-panel.html %}
+  </div>
+</div>
+
+{% include markers.html %}
+{% include translations.html %}
+<script src="{{ '/app.js' | relative_url }}"></script>
+
+</body>
+</html>

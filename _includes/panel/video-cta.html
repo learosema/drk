@@ -1,0 +1,18 @@
+<div class="video-cta-block cta-block {{ include.color }}">
+  <h4>{{ include.title }}</h4>
+  {% if include.body %}<p>{{ include.body }}</p>{% endif %}
+  <button class="video-open-btn" onclick="this.closest('.video-cta-block').querySelector('dialog').showModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    {% if page.lang == "de" %}Video ansehen{% else %}Watch video{% endif %}
+  </button>
+  <dialog class="video-dialog" aria-label="{{ include.title }}" onclose="this.querySelector('video').pause()">
+    <form method="dialog">
+      <button class="video-dialog-close" autofocus aria-label="{% if page.lang == 'de' %}Schließen{% else %}Close{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </form>
+    <video controls preload="none"{% if include.poster %} poster="{{ include.poster }}"{% endif %}>
+      <source src="{{ include.src }}" type="video/mp4">
+    </video>
+  </dialog>
+</div>

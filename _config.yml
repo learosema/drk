@@ -1,0 +1,6 @@
+baseurl: "/drk"
+url: "https://learosema.github.io"
+
+collections:
+  panels:
+    output: false

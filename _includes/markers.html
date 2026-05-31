@@ -1,0 +1,7 @@
+<script>
+const MARKERS = [
+  {% assign panel_groups = site.panels | group_by: "panel_id" %}{% for group in panel_groups %}{% assign p = group.items | first %}
+  { id:'{{ p.panel_id }}', level:'{{ p.level }}', lng:{{ p.lng }}, lat:{{ p.lat }}, hq:{{ p.hq }} },
+  {% endfor %}
+];
+</script>

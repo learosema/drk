@@ -1,0 +1,5 @@
+{% if include.url %}{% assign cta_href = include.url %}{% unless cta_href contains "://" %}{% assign cta_href = "https://" | append: cta_href %}{% endunless %}{% endif %}
+<div class="cta-block {{ include.color }}">
+  <h4>{{ include.title }}</h4>
+  <p>{{ include.body }}{% if include.url %} <a class="cta-link" href="{{ cta_href }}" target="_blank" rel="noopener noreferrer">{{ include.url }}</a>{% endif %}</p>
+</div>

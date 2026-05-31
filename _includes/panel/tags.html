@@ -1,0 +1,11 @@
+<div class="tag-list">
+  {% assign items = include.tags | split: "|" %}
+  {% for item in items %}
+    {% assign parts = item | split: ":" %}
+    {% if parts.size > 1 %}
+      <span class="tag {{ parts[0] | strip }}">{{ parts[1] | strip }}</span>
+    {% else %}
+      <span class="tag">{{ item | strip }}</span>
+    {% endif %}
+  {% endfor %}
+</div>
